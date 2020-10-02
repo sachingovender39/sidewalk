@@ -16,5 +16,10 @@ app.get('/app',function(req,res){
   res.render('app_not_found');
 });
 
+app.get('/newsletter', function(req,res){
+  res.render('newsletter');
+}
+);
+
 //server listen
 app.listen(3000,function(){console.log("Server ready");});

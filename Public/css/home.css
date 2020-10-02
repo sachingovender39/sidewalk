@@ -195,3 +195,15 @@ p {
   color: white;
   text-decoration: none;
 }
+
+.social{
+  color: black;
+}
+
+.logo{
+  color:white;
+}
+
+.logo:hover{
+  color:white;
+}
