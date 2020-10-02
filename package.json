@@ -1,0 +1,25 @@
+{
+  "name": "sidewalk",
+  "version": "1.0.0",
+  "description": "sidewalk",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sachingovender39/sidewalk.git"
+  },
+  "author": "Sachin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sachingovender39/sidewalk/issues"
+  },
+  "homepage": "https://github.com/sachingovender39/sidewalk#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1"
+  }
+}
