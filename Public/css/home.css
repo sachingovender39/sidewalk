@@ -179,3 +179,19 @@ p {
     transform: rotate(0);
   }
 }
+
+.download{
+  color: white;
+}
+.download:hover{
+  text-decoration: none;
+  color: black;
+}
+
+.apple{
+  color: white;
+}
+.apple:hover{
+  color: white;
+  text-decoration: none;
+}
