@@ -46,21 +46,37 @@ app.post("/mail_list",function(req,res){
   const request = https.request(url,options,function(response){
     if (response.statusCode==200)
     {
-      res.render('success_newsletter');
+      //res.render('success_newsletter');
+      response.on('data',function(d){
+        console.log(JSON.parse(d));
+        const feedback = JSON.parse(d);
+        console.log(feedback.error_count);
+        if (feedback.error_count!=0){
+          console.log(feedback.errors[0].error_code);
+          const error_data = {message:feedback.errors[0].error_code};
+          res.render('fail_newsletter',error_data);
+        }
+        else
+        {
+          console.log('no error');
+          res.render('success_newsletter');
+        }
+      });
+
     }
     else
     {
-      res.render('fail_newsletter');
+      const error_data = {message:'HTTP ERROR'+String(response.statusCode)};
+      res.render('fail_newsletter',error_data);
+      //request.write(jsonData);
+      //request.end();
     }
-    response.on('data',function(d){
-      //console.log(JSON.parse(d));
-    });
-
   });
-  //try and send a request with the data
   request.write(jsonData);
   request.end();
-});
+  });
+  //try and send a request with the data
+
 
 //server listen
 app.listen(3000,function(){console.log("Server ready");});
