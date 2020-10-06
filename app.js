@@ -186,6 +186,7 @@ app.post('/login',function(req,res){
 app.get('/feed',function(req,res){
   if (req.isAuthenticated())
   {
+    req.session.current_url = '/feed';
     post.find({},function(err,result){
       res.render('feed',{items:result});
     });
@@ -245,6 +246,7 @@ app.get("/auth/google/feed",
 //user post submission
 app.post('/user/post', function(req,res){
   //add post to post database
+  console.log(req.url);
   const current_date = new Date();
   const new_post = new post({username:req.user.username,message:req.body.message,date:current_date});
   new_post.save(function(err){if (err) return console.error(err);});
@@ -259,7 +261,7 @@ app.post('/user/post', function(req,res){
       if(foundUser)
       {
         foundUser.posts.unshift(new_post);
-        foundUser.save(function(){res.redirect('/feed');});
+        foundUser.save(function(){res.redirect(req.session.current_url);});
       }
     }
   });
@@ -270,6 +272,7 @@ app.post('/user/post', function(req,res){
 app.get('/profile', function(req,res){
   if (req.isAuthenticated())
   {
+    req.session.current_url = '/profile';
     const profile_data = {username:req.user.username,posts:req.user.posts,email:req.user.email,about:req.user.about};
     res.render('profile',profile_data);
   }
