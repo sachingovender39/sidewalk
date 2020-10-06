@@ -11,7 +11,7 @@
 .entry{
   text-align: left;
   margin-left: 80px;
-  margin-top:0.5rem;
+  margin-top:1rem;
 }
 .newpost{
   width: 80%;
@@ -60,4 +60,9 @@
 }
 .post-date{
   text-align: right;
+}
+
+.posts{
+  overflow-y: scroll;
+  height: 1230px;
 }

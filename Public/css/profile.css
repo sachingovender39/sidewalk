@@ -91,3 +91,8 @@ span.tags
 .profile_attr{
   color: black;
 }
+
+.myposts{
+  overflow-y: scroll;
+  height: 990px;
+}
