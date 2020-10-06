@@ -76,8 +76,13 @@ span.tags
     z-index: 10;
     }
 .profile_cont{
-  padding:0 0 0 0;
+  padding:1rem 4rem;
   margin-top:0.5rem;
+  background-color: #ecf4f3;
+  width:75%;
+  text-align: left;
+  margin-left: 5rem;
+  padding-right: 3rem;
 }
 .profile_details{
   text-align: left;
