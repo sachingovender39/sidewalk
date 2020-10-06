@@ -1,0 +1,30 @@
+<%- include('partials/header') %>
+<%- include('partials/ticker') %>
+<div class="row">
+<div class="col-lg-4 main">
+<%- include('partials/sidebar') %>
+</div>
+<div class="col-lg-8 main">
+  <div class="entry form-group shadow-textarea">
+    <form class="entry-form form-group shadow-textarea" action='/user/post' method="post">
+      <h3 class="post-header">New Post</h3>
+      <br>
+      <textarea class="form-control z-depth-1 newpost"name="message" rows="8" cols="100" placeholder="Write something"></textarea>
+      <br>
+      <button class="btn btn-lg postbutton"type="submit" name="Submit">Post</button>
+    </form>
+
+  </div>
+  <div class="posts">
+    <%for(var i = items.length-1; i>=0; i = i-1){%>
+      <div class="card bg-light post">
+        <a class="post-user"><%=items[i].username%></a>
+        <p class = "post-message"><%=items[i].message%></p>
+        <p class = "post-date"><%=items[i].date%></p>
+      </div>
+    <%}%>
+  </div>
+</div>
+</div>
+
+<%- include('partials/footer') %>

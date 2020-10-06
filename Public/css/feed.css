@@ -1,0 +1,63 @@
+#nav{
+  padding-bottom: 0;
+  height: 100px;
+  padding-left: 2%;
+  padding-right: 2%;
+}
+.stock{
+  margin-left: auto;
+  margin-right: auto;
+}
+.entry{
+  text-align: left;
+  margin-left: 80px;
+  margin-top:0.5rem;
+}
+.newpost{
+  width: 80%;
+}
+.shadow-textarea textarea.form-control::placeholder {
+    font-weight: 300;
+}
+.shadow-textarea textarea.form-control {
+    padding-left: 0.8rem;
+}
+
+.postbutton{
+  background-color:#84a9ac;
+  color: white;
+  border-color: #065c6f;
+}
+.postbutton:hover{
+  background-color: #3b6978;
+}
+
+.post-header{
+  font-weight: bold;
+  padding-bottom:3px;
+}
+
+.main{
+  padding:1.5rem 0;
+}
+
+.post{
+  border-width: medium;
+  margin: 2rem 5rem;
+  padding:1rem 1rem;
+}
+.post-user{
+  text-align:left;
+  line-height: 2rem;
+  font-weight: bolder;
+  font-size: large;
+}
+.post-message{
+  text-align: left;
+  line-height: 3rem;
+  color: black;
+  font-size: x-large;
+}
+.post-date{
+  text-align: right;
+}
