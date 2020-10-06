@@ -70,7 +70,6 @@ passport.use(new GoogleStrategy({
         }
         else{
           if (foundUser.email===''){
-            console.log( profile.emails[0].value);
             foundUser.email = profile.emails[0].value;
             foundUser.save(function(){console.log(profile.emails[0].value);});
           }
@@ -109,7 +108,6 @@ app.post("/mail_list",function(req,res){
     members:[memb]
   };
   jsonData = JSON.stringify(data);
-  console.log(jsonData);
   //Establish request handler
   var url = "https://us2.api.mailchimp.com/3.0/lists/94b1086669";
   var options={
@@ -123,9 +121,7 @@ app.post("/mail_list",function(req,res){
       response.on('data',function(d){
         console.log(JSON.parse(d));
         const feedback = JSON.parse(d);
-        console.log(feedback.error_count);
         if (feedback.error_count!=0){
-          console.log(feedback.errors[0].error_code);
           const error_data = {message:feedback.errors[0].error_code};
           res.render('fail_newsletter',error_data);
         }
@@ -196,7 +192,6 @@ app.get('/feed',function(req,res){
   }
   else
   {
-    console.log("oops");
     res.redirect('/login');
   }
 });
@@ -232,7 +227,6 @@ app.post('/register',function(req,res){
 
 //logout of feed page
 app.get('/logout', function (req, res){
-  console.log('trying to logout');
   req.session.destroy(function (err) {
     res.redirect('/');
   });
@@ -276,7 +270,6 @@ app.post('/user/post', function(req,res){
 app.get('/profile', function(req,res){
   if (req.isAuthenticated())
   {
-    console.log(req.user.email);
     const profile_data = {username:req.user.username,posts:req.user.posts,email:req.user.email,about:req.user.about};
     res.render('profile',profile_data);
   }
