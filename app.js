@@ -24,7 +24,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 //database connection
-mongoose.connect('mongodb://localhost/userDB', {useNewUrlParser: true});
+mongoose.connect(process.env.MONGO_CONNECTION, {useNewUrlParser: true});
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
