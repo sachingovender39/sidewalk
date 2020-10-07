@@ -352,4 +352,4 @@ app.post('/profile/email', function(req,res){
 });
 
 //server listen
-app.listen(3000,function(){console.log("Server ready");});
+app.listen(process.env.PORT,function(){console.log("Server ready");});
