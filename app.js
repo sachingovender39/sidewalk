@@ -61,22 +61,42 @@ passport.use(new GoogleStrategy({
   },
   function(accessToken, refreshToken, profile, cb) {
     console.log(profile);
-    const new_username = profile.name.givenName+profile.name.familyName+String(123);
-    user.findOrCreate({ username:new_username ,googleID: profile.id}, function (err, result) {
-      user.findOne({googleID:profile.id}, function(err,foundUser){
-        if(err)
-        {
-          console.log(err);
+    user.findOne({googleID:profile.id}, function(err,foundUser){
+      if(err)
+      {
+        console.log(err);
+      }
+      else{
+        var new_username="";
+        if (foundUser.username===''){
+          console.log('new user');
+          const random_val = Math.floor(Math.random() * 101);
+          new_username = profile.name.givenName+profile.name.familyName+String(random_val);
         }
         else{
-          if (foundUser.email===''){
-            foundUser.email = profile.emails[0].value;
-            foundUser.save(function(){console.log(profile.emails[0].value);});
-          }
+            console.log('current user');
+          new_username = foundUser.username ;
         }
-      });
-      return cb(err, result);
+        user.findOrCreate({ username:new_username ,googleID: profile.id}, function (err, result) {
+          user.findOne({googleID:profile.id}, function(err,foundUser){
+            if(err)
+            {
+              console.log(err);
+            }
+            else{
+              console.log(foundUser.email);
+              if (foundUser.email==null){
+                foundUser.email = profile.emails[0].value;
+                foundUser.save(function(){console.log(profile.emails[0].value);});
+              }
+            }
+          });
+          return cb(err, result);
+        });
+
+      }
     });
+
   }
 ));
 ////////////////requests///////////////////
@@ -246,7 +266,6 @@ app.get("/auth/google/feed",
 //user post submission
 app.post('/user/post', function(req,res){
   //add post to post database
-  console.log(req.url);
   const current_date = new Date();
   const new_post = new post({username:req.user.username,message:req.body.message,date:current_date});
   new_post.save(function(err){if (err) return console.error(err);});
