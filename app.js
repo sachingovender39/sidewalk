@@ -68,7 +68,7 @@ passport.use(new GoogleStrategy({
       }
       else{
         var new_username="";
-        if (foundUser.username===''){
+        if (foundUser==null){
           console.log('new user');
           const random_val = Math.floor(Math.random() * 101);
           new_username = profile.name.givenName+profile.name.familyName+String(random_val);
