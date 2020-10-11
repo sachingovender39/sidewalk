@@ -414,6 +414,9 @@ app.post("/userProfile",function(req,res){
     else{
       if (foundUser){
         console.log('user loaded');
+        if (foundUser.username==req.user.username){
+        res.redirect('/profile');
+        }
         if (foundUser.about==null){
         req.session.profile_data = {username:foundUser.username,posts:foundUser.posts,email:foundUser.email,about:'',myprofile:false};
         }
