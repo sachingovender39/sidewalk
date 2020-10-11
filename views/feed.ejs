@@ -19,7 +19,9 @@
   <div class="posts">
     <%for(var i = items.length-1; i>=0; i = i-1){%>
       <div class="card bg-light post">
-        <a class="post-user"><%=items[i].username%></a>
+        <form class="post-user" action="/userProfile" method="post">
+          <button class="user-link"type="submit" name="username" value="<%=items[i].username%>"><%=items[i].username%></button>
+        </form>
         <p class = "post-message"><%=items[i].message%></p>
         <p class = "post-date"><%=items[i].date%></p>
       </div>

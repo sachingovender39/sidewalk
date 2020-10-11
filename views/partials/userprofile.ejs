@@ -2,10 +2,18 @@
 	<div class="row">
 
                 <div class="col-lg-6 profile_details">
-                    <h2><%=username%></h2>
-                    <p class="profile_attr"><strong>About: </strong> <%=about%> </p>
-                    <p class="profile_attr"><strong>Email: </strong> <%=email%> </p>
-
+                    <h2 class="user_header"><%=username%></h2>
+										<%if (myprofile){%>
+										<button class="update"type="button" name="updateUser"data-toggle="modal" data-target="#UserModal"><i class="fas fa-pen"></i></button>
+										<%}%>
+										<br>
+                    <span class="profile_attr"><strong>About: </strong> <%=about%> </span>
+										<br>
+                    <span class="profile_attr"><strong>Email: </strong> <%=email%> </span>
+										<br>
+										<%if (myprofile){%>
+											<button id="updatebutton"class="btn btn-lg postbutton"type="button" name="button" data-toggle="modal" data-target="#UpdateModal">Update</button>
+										<%}%>
                 </div>
                 <div class="col-lg-6 text-center">
                     <figure>
@@ -16,6 +24,52 @@
                         <p><small>Posts</small></p>
                     </div>
                 </div>
+								<!-- Modal -->
+								<div class="modal fade" id="UserModal" role="dialog">
+									<div class="modal-dialog">
 
+										<!-- Modal content-->
+										<div class="modal-content">
+											<div class="modal-header">
+												<h4 class="modal-title">Change Username</h4>
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+											</div>
+											<div class="modal-body">
+												<form method='post' action='/profile/username'>
+												<label>New Username:</label>
+												<input class='form-control'type="text" name="username" value="<%=username%>">
+												<br>
+												<button class="btn btn-lg postbutton" type="submit" name="update">Update</button>
+												</form>
+											</div>
+										</div>
+
+									</div>
+								</div>
+								<!-- Modal -->
+								<div class="modal fade" id="UpdateModal" role="dialog">
+									<div class="modal-dialog">
+
+										<!-- Modal content-->
+										<div class="modal-content">
+											<div class="modal-header">
+												<h4 class="modal-title">Change Details</h4>
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+											</div>
+											<div class="modal-body">
+												<form method='post' action='/profile/update'>
+												<label>Email</label>
+												<input class='form-control' type="text" name="new_email" value="<%=email%>">
+												<br>
+												<label>About</label>
+												<br>
+												<textarea class='form-control' name="new_about" rows="8" cols="80" ><%=about%></textarea>
+												<button id = "modal_btn"class="btn btn-lg postbutton" type="submit" name="update">Update</button>
+												</form>
+											</div>
+										</div>
+
+									</div>
+								</div>
             </div>
 	</div>

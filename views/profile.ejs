@@ -7,21 +7,25 @@
         </div>
         <div class="col-lg-8 main">
         <%- include('partials/userprofile') %>
-          <div class="entry form-group shadow-textarea">
-            <form class="entry-form form-group shadow-textarea" action='/user/post' method="post">
-              <h3 class="post-header">New Post</h3>
-              <br>
-              <textarea class="form-control z-depth-1 newpost"name="message" rows="8" cols="100" placeholder="Write something"></textarea>
-              <br>
-              <button class="btn btn-lg postbutton"type="submit" name="Submit">Post</button>
-            </form>
-
-          </div>
+        <%if (myprofile){%>
+        <%- include('partials/newpost') %>
+        <%}%>
           <h2 class="post-header entry">Posts</h2>
           <div class="myposts">
             <%for(var i = 0; i<posts.length; i++){%>
               <div class="card bg-light post">
-                <a class="post-user"><%=username%></a>
+                <div class="row">
+                  <div class="col">
+                  <h4 class="post-user"><%=username%></h4>
+                  </div>
+                  <div class="col del_pos">
+                    <%if (myprofile){%>
+                    <form class="del_button" action="/profile/delPost" method="post">
+                      <button class="del_button" type="submit" name="Post_id" value="<%=posts[i]._id%>"><i class="fas fa-trash-alt"></i></button>
+                    </form>
+                    <%}%>
+                  </div>
+                </div>
                 <p class = "post-message"><%=posts[i].message%></p>
                 <p class = "post-date"><%=posts[i].date%></p>
               </div>

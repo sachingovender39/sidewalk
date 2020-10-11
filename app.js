@@ -11,6 +11,8 @@ const passportLocal = require('passport-local');
 const passportMong = require('passport-local-mongoose');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const findOrCreate = require('mongoose-findorcreate');
+
+//const database_functions = require('./database');
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static("Public"));
 app.set('view engine', 'ejs');
@@ -184,23 +186,13 @@ app.post('/login',function(req,res){
   else
   {
     console.log('trying to authenticate');
-    var authenticate = user.authenticate();
-    authenticate(req.body.username, req.body.password, function(err, result) {
-      if (err)
-      {
-        console.log(err);
-      }
-      else{
-        console.log("login authenticated");
-        console.log(result);
-        res.redirect('/feed');
-      }
+    passport.authenticate("local")(req, res, function(){
+    res.redirect("/feed");
     });
-  }
-
-  });
+  }});
 
 });
+
 
 //feed page
 app.get('/feed',function(req,res){
@@ -292,15 +284,25 @@ app.get('/profile', function(req,res){
   if (req.isAuthenticated())
   {
     req.session.current_url = '/profile';
-    const profile_data = {username:req.user.username,posts:req.user.posts,email:req.user.email,about:req.user.about};
+    const profile_data={username:req.user.username,posts:req.user.posts,email:req.user.email,about:req.user.about,myprofile:true};
     res.render('profile',profile_data);
   }
   else{
     res.redirect('/login');
   }
 });
+//other user page
+app.get('/userView',function(req,res){
+  if (req.isAuthenticated())
+  {
+    res.render('profile',req.session.profile_data);
+  }
+  else{
+    res.redirect('/login');
+  }
+});
 //update username
-/*app.post('/profile/username', function(req,res){
+app.post('/profile/username', function(req,res){
   const new_username = req.body.username;
   user.find({username:new_username}, function(err,result){
     console.log(result);
@@ -319,7 +321,7 @@ app.get('/profile', function(req,res){
             if(foundUser){
               post.updateMany({username:req.user.username},{$set:{username:new_username}},function(){
                 foundUser.username=new_username;
-                for (var i = 0;i<foundUser.posts;i++)
+                for (var i = 0;i<foundUser.posts.length;i++)
                 {
                   foundUser.posts[i].username = new_username;
                 }
@@ -334,22 +336,132 @@ app.get('/profile', function(req,res){
       }
     }
   });
-});*/
-//update email
-app.post('/profile/email', function(req,res){
-  const new_email = req.body.email;
+});
+
+
+//deletepost
+app.post('/profile/delPost',function(req,res){
+  console.log(req.body);
+  user.updateOne({_id:req.user._id},{
+        "$pull": {
+            "posts": {
+                "_id": req.body.Post_id
+            }
+        }
+    }, function(err,foundUser){
+    if(err)
+    {
+      console.log(err);
+    }
+    else
+    {
+      if(foundUser)
+      {
+        console.log('Updated');
+        post.findOneAndDelete({_id:req.body.Post_id }, function(err,result){
+          if(err){console.log(err);}
+          else{
+            console.log('post deleted');
+            res.redirect('/profile');
+          }
+        });
+      }
+    }
+  });
+}
+);
+
+//Update profile
+app.post('/profile/update',function(req,res){
+  console.log(req.body);
+  const new_about = req.body.new_about;
+  const new_email = req.body.new_email;
+  //const new_username = req.body.new_username;
+  //checkUser(new_username);
   user.findById({_id:req.user._id},function(err,result){
     if (err){
       console.log(err);
     }
     else{
       if(result){
-        result.email=new_email;
+        console.log('updating user profile');
+        result.about=new_about;
+        result.email = new_email;
         result.save(function(){res.redirect('/profile');});
+        /*if (Unique_name){
+          post.updateMany({username:req.user.username},{$set:{username:new_username}},function(){
+            result.username=new_username;
+            for (var i = 0;i<result.posts.length;i++)
+            {
+              result.posts[i].username = new_username;
+            }
+            result.save(function(){res.redirect('/profile');});
+          });
+        }
+        else{
+          console.log("username found");
+          result.save(function(){res.redirect('/profile');});
+        }*/
       }
     }
   });
 });
+//view another user's page
+app.post("/userProfile",function(req,res){
+  console.log(req.body);
+  user.findOne({username:req.body.username},function(err,foundUser){
+    if(err){console.log(err);}
+    else{
+      if (foundUser){
+        console.log('user loaded');
+        if (foundUser.about==null){
+        req.session.profile_data = {username:foundUser.username,posts:foundUser.posts,email:foundUser.email,about:'',myprofile:false};
+        }
+        else{
+        req.session.profile_data = {username:foundUser.username,posts:foundUser.posts,email:foundUser.email,about:foundUser.about,myprofile:false};
+        }
+        console.log(req.session.profile_data);
+        res.redirect('/userView');
+      }
+    }
+  });
+});
+/*var checkUser = function(new_username){
+  console.log("called");
+  console.log(true);
+  user.find({username:new_username}, function(err,result){
+    console.log(result);
+    if (err)
+    {
+      console.log('no found user');
+      Unique_name=false;
+    }
+    else{
+      if (result.length==0){
+        console.log("username available");
+        user.findById({_id:req.user._id},function(err,foundUser){
+          if (err){
+            console.log(err);
+          }
+          else{
+            if(foundUser){
+              Unique_name= true;
+            }
+          }
+        });
+      }
+      else{
+        console.log('found user');
+        Unique_name=false;
+      }
+    }
+  });
+}
+
+module.exports={
+  checkUser:checkUser
+}*/
 
 //server listen
 app.listen(process.env.PORT,function(){console.log("Server ready");});
+//process.env.PORT

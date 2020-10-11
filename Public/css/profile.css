@@ -78,11 +78,16 @@ span.tags
 .profile_cont{
   padding:1rem 4rem;
   margin-top:0.5rem;
-  background-color: #ecf4f3;
+  background-color: #e4e3e3;
   width:75%;
   text-align: left;
   margin-left: 5rem;
   padding-right: 3rem;
+  border-style: solid;
+  border-width: thin;
+  border-color: black;
+  border-radius: 6px;
+
 }
 .profile_details{
   text-align: left;
@@ -95,4 +100,49 @@ span.tags
 .myposts{
   overflow-y: scroll;
   height: 990px;
+}
+.del{
+  text-align: right;
+  color: black;
+}
+.update{
+  background-color: inherit;
+  border-width: 0;
+}
+#updatebutton{
+  margin-top: 1rem;
+}
+.user_header{
+display: inline-block;
+}
+
+.modal-body{
+  background-color: #e4e3e3;
+  color: #393b44;
+}
+
+.modal-header{
+  background-color:#84a9ac;
+  color: white;
+  border-color: #065c6f;
+}
+#modal_btn{
+  margin-top: 1rem;
+}
+.inline{
+  width:50%;
+  display:inline;
+}
+
+.del_button{
+  width:35px;
+  float: right;
+  background-color: inherit;
+  border-width: 0;
+}
+.right{
+  text-align:right;
+}
+.del_pos{
+  padding-top: 2px;
 }

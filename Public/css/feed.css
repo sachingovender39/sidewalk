@@ -1,8 +1,8 @@
 #nav{
   padding-bottom: 0;
-  height: 100px;
   padding-left: 2%;
   padding-right: 2%;
+  max-height: 250px;
 }
 .stock{
   margin-left: auto;
@@ -42,6 +42,7 @@
 }
 
 .post{
+  border-radius: 10px;
   border-width: medium;
   margin: 2rem 5rem;
   padding:1rem 1rem;
@@ -49,8 +50,12 @@
 .post-user{
   text-align:left;
   line-height: 2rem;
-  font-weight: bolder;
+  font-weight: bold;
   font-size: large;
+  background-color: inherit;
+  border-width: 0;
+  letter-spacing: 2px;
+  color: #393b44;
 }
 .post-message{
   text-align: left;
@@ -65,4 +70,16 @@
 .posts{
   overflow-y: scroll;
   height: 1230px;
+}
+.user-link{
+  background-color: inherit;
+  border-width: 0;
+  font-weight: bold;
+  font-size: large;
+  padding-left: 0;
+  letter-spacing: 2px;
+  color: #393b44;
+}
+.nav-feed{
+  padding-bottom: 10px;
 }
