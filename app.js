@@ -414,9 +414,6 @@ app.post("/userProfile",function(req,res){
     else{
       if (foundUser){
         console.log('user loaded');
-        if (foundUser.username==req.user.username){
-        res.redirect('/profile');
-        }
         if (foundUser.about==null){
         req.session.profile_data = {username:foundUser.username,posts:foundUser.posts,email:foundUser.email,about:'',myprofile:false};
         }
@@ -424,7 +421,14 @@ app.post("/userProfile",function(req,res){
         req.session.profile_data = {username:foundUser.username,posts:foundUser.posts,email:foundUser.email,about:foundUser.about,myprofile:false};
         }
         console.log(req.session.profile_data);
-        res.redirect('/userView');
+        if(foundUser.username==req.user.username){
+          console.log('match');
+          res.redirect('/profile');
+        }
+        else{
+          console.log('diff');
+          res.redirect('/userView');
+        }
       }
     }
   });
