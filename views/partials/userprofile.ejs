@@ -1,29 +1,33 @@
 <div class="container profile_cont">
-	<div class="row">
+	<div class="row profile_row">
 
-                <div class="col-lg-6 profile_details">
-                    <h2 class="user_header"><%=username%></h2>
+                <div class="col-12 text-center profile_background">
+                        <img src="https://www.flaticon.com/svg/static/icons/svg/3443/3443461.svg" alt="" class="img-circle img-responsive" width='100'height="100">
+                </div>
+								<div class="col-12 profile_details">
+										<h2 class="user_header"><%=username%></h2>
 										<%if (myprofile){%>
 										<button class="update"type="button" name="updateUser"data-toggle="modal" data-target="#UserModal"><i class="fas fa-pen"></i></button>
 										<%}%>
 										<br>
-                    <span class="profile_attr"><strong>About: </strong> <%=about%> </span>
+										<span class="profile_attr"><strong>About: </strong> <%=about%> </span>
 										<br>
-                    <span class="profile_attr"><strong>Email: </strong> <%=email%> </span>
+										<span class="profile_attr"><strong>Email: </strong> <%=email%> </span>
 										<br>
-										<%if (myprofile){%>
-											<button id="updatebutton"class="btn btn-lg postbutton"type="button" name="button" data-toggle="modal" data-target="#UpdateModal">Update</button>
-										<%}%>
-                </div>
-                <div class="col-lg-6 text-center">
-                    <figure>
-                        <img src="https://www.flaticon.com/svg/static/icons/svg/3443/3443461.svg" alt="" class="img-circle img-responsive" width='100'height="100">
-                    </figure>
-                    <div class="emphasis">
-                        <h2><strong><%=posts.length%></strong></h2>
-                        <p><small>Posts</small></p>
-                    </div>
-                </div>
+										<div class="row">
+											<div class="col">
+												<div class="emphasis">
+														<h2><strong><%=posts.length%></strong></h2>
+														<p><small>Posts</small></p>
+												</div>	
+											</div>
+											<div class="col">
+												<%if (myprofile){%>
+													<button id="updatebutton"class="btn btn-lg postbutton"type="button" name="button" data-toggle="modal" data-target="#UpdateModal">Update</button>
+												<%}%>
+											</div>
+										</div>
+								</div>
 								<!-- Modal -->
 								<div class="modal fade" id="UserModal" role="dialog">
 									<div class="modal-dialog">

@@ -25,6 +25,7 @@ figcaption.ratings a:hover
 .emphasis
 {
     border-top: 4px solid transparent;
+    display: inline-block;
     }
 .emphasis:hover
 {
@@ -76,17 +77,18 @@ span.tags
     z-index: 10;
     }
 .profile_cont{
-  padding:1rem 4rem;
+  padding:1rem 0;
+  padding-top: 0;
   margin-top:0.5rem;
   background-color: #e4e3e3;
   width:75%;
   text-align: left;
   margin-left: 5rem;
-  padding-right: 3rem;
+  padding-right: 0;
   border-style: solid;
-  border-width: thin;
-  border-color: black;
-  border-radius: 6px;
+  border-width:0;
+  border-color: #393b44;
+  border-radius: 4px;
 
 }
 .profile_details{
@@ -110,7 +112,8 @@ span.tags
   border-width: 0;
 }
 #updatebutton{
-  margin-top: 1rem;
+  margin-top: 0.7rem;
+  float: right;
 }
 .user_header{
 display: inline-block;
@@ -145,4 +148,14 @@ display: inline-block;
 }
 .del_pos{
   padding-top: 2px;
+}
+
+.profile_background{
+
+  background-image: url("https://images.pexels.com/photos/373076/pexels-photo-373076.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=400&w=1000");
+  background-size: cover;
+}
+.profile_row{
+  margin-left: 0;
+  margin-right: 0;
 }
