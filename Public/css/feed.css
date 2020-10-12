@@ -1,3 +1,6 @@
+body{
+  background-color: #f6f6f6;
+}
 #nav{
   padding-bottom: 0;
   padding-left: 2%;
@@ -10,11 +13,13 @@
 }
 .entry{
   text-align: left;
-  margin-left: 80px;
+  width:100%;
+  margin: 0 auto;
   margin-top:1rem;
+  padding:0 9.5rem;
 }
 .newpost{
-  width: 80%;
+  width: 100%;
 }
 .shadow-textarea textarea.form-control::placeholder {
     font-weight: 300;
@@ -43,9 +48,12 @@
 
 .post{
   border-radius: 10px;
-  border-width: medium;
-  margin: 2rem 5rem;
+  border-width: thin;
+  margin: 2rem auto;
   padding:1rem 1rem;
+  width:75%;
+  position: relative;
+  left: 2px;
 }
 .post-user{
   text-align:left;
